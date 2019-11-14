@@ -11,6 +11,7 @@
 |
 */
 
-Auth::routes();
+Route::post('/check-email', 'ValidationController@isValidEmail');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+Route::get('/', 'RssController@index')->name('index');
