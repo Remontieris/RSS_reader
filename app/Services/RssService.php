@@ -78,8 +78,8 @@ class RssService
         }
 
         $last_saved_update = LastUpdated::orderBy('id', 'DESC')->first();
-        
-        if(empty($last_saved_update)){
+
+        if (empty($last_saved_update)) {
             return true;
         }
 

@@ -41,7 +41,7 @@ class ListFactory
             return null;
         }
 
-        if($rss_service->updated != null) {
+        if ($rss_service->updated != null) {
             $this->feed_last_updated = $rss_service->updated;
         } else {
             $this->feed_last_updated = Carbon::now()->toDateTimeString();
