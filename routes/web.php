@@ -14,4 +14,4 @@
 Route::post('/check-email', 'ValidationController@isValidEmail');
 
 Auth::routes();
-Route::get('/', 'RssController@index')->name('index');
+Route::get('/', 'RssController@index')->middleware('auth')->name('index');
