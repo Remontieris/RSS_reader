@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\LastUpdated;
+use GuzzleHttp\Client;
 
 class RssService
 {
@@ -39,8 +40,11 @@ class RssService
     private function readRss()
     {
         $feed_url = 'https://www.theregister.co.uk/software/headlines.atom';
+
         try {
-            $feed = file_get_contents($feed_url);
+            $client = new Client();
+            $response = $client->request('GET', $feed_url, ['verify' => false]);
+            $feed = $response->getBody()->getContents();
         } catch (\Exception $e) {
             $feed = null;
         }
