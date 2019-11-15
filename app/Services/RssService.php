@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\LastUpdated;
 use GuzzleHttp\Client;
 use App\Services\WordSortService;
 use App\Services\HasChangedService;

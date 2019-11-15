@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\LastUpdated;
+
 class HasChangedService
 {
  /**
@@ -10,7 +12,7 @@ class HasChangedService
      * @param string $feed RSS feed as string
      * @return boolean returns true or false
      */
-    private function hasFeedChanged($feed = null)
+    public function hasFeedChanged($feed = null)
     {
         if ($feed == null) {
             return true;
