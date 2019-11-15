@@ -3,12 +3,17 @@
 namespace App\Services;
 
 use KubAT\PhpSimple\HtmlDomParser;
+use GuzzleHttp\Client;
+use App\Services\ReadUrlService;
 
 class PopularWordListService
 {
+    private $word_list_url = 'https://en.wikipedia.org/wiki/Most_common_words_in_English';
+
     public function returnPopularWordList()
     {
-        $page_html = $this->getListAsHtml();
+        $read_url_service = new ReadUrlService();
+        $page_html = $read_url_service->returnContentFromUrl($this->word_list_url);
 
         if ($page_html == null) {
             return null;
@@ -19,27 +24,6 @@ class PopularWordListService
         return $word_list;
     }
 
-    /**
-     * Requests most commot word list page from Wikipedia API and return
-     * the page content as string
-     *
-     * @return string $list_as_html most common word list page as string
-     */
-    private function getListAsHtml()
-    {
-        $feed_url = 'https://en.wikipedia.org/w/api.php?action=parse&page=Most_common_words_in_English&format=json';
-        $raw_feed = file_get_contents($feed_url);
-        $feed = json_decode($raw_feed);
-
-        if (!empty($feed->error)) {
-            return null;
-        }
-
-        $feed_array = (array) $feed->parse->text;
-        $list_as_html = strtolower($feed_array['*']);
-
-        return $list_as_html;
-    }
 
     /**
      * Generates array of top 50 most popular words in english from wikipedia
