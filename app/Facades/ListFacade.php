@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Factories;
+namespace App\Facades;
 
 use App\Services\PopularWordListService;
 use App\Services\RssService;
