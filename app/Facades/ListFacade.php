@@ -8,7 +8,7 @@ use App\WordList;
 use App\LastUpdated;
 use \Carbon\Carbon;
 
-class ListFactory
+class ListFacade
 {
     private $list_from_feed;
     private $most_popular_names;
