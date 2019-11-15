@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use KubAT\PhpSimple\HtmlDomParser;
-use GuzzleHttp\Client;
-use App\Services\ReadUrlService;
+use App\Services\TableToArrayService;
 
 class PopularWordListService
 {
@@ -19,31 +17,8 @@ class PopularWordListService
             return null;
         }
 
-        $word_list = array_flip($this->parseListToArray($page_html));
-
-        return $word_list;
-    }
-
-
-    /**
-     * Generates array of top 50 most popular words in english from wikipedia
-     *
-     * @param string $page_html Wikipedia page as string
-     * @return array $sanitized_feed sorted and sanitized feed as array
-     */
-    private function parseListToArray($page_html)
-    {
-        $html = HtmlDomParser::str_get_html($page_html);
-        $word_list = [];
-        $i = 0;
-
-        foreach ($html->find('a[class=extiw]') as $key => $row) {
-            if ($i == 50) {
-                break;
-            }
-            array_push($word_list, $row->plaintext);
-            $i++;
-        }
+        $table_to_array =  new TableToArrayService();
+        $word_list = $table_to_array->returnList($page_html);
 
         return $word_list;
     }
