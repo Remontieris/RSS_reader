@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\LastUpdated;
 use GuzzleHttp\Client;
+use App\Services\WordSortService;
 
 class RssService
 {
@@ -12,17 +13,6 @@ class RssService
 
     public function returnRss()
     {
-        $rss_feed = $this->prepareFeed();
-        return $rss_feed;
-    }
-
-    /**
-     * Prepares feed for returnRss function
-     *
-     * @return array $sorted_feed array with words as keys and occurrence as value
-     */
-    private function prepareFeed()
-    {
         $read_url_service = new ReadUrlService();
         $unsanitized_feed = $read_url_service->returnContentFromUrl($this->feed_url);
 
@@ -30,23 +20,8 @@ class RssService
             return null;
         }
 
-        $sorted_feed = $this->sanitizeAndSortFeed($unsanitized_feed);
-        return $sorted_feed;
-    }
-
-    /**
-     * Sanitizes and sorts the given string
-     *
-     * @param string $unsanitized_feed Unsanitized rss feed
-     * @return array $sanitized_feed sorted and sanitized feed as array
-     */
-    private function sanitizeAndSortFeed($unsanitized_feed = null)
-    {
-        $sanitized_feed = preg_replace('/(?=[^ ]*[^A-Za-z \'-])([^ ]*)(?:\\s+|$)/', '', $unsanitized_feed);
-        $sanitized_feed = strtolower($sanitized_feed);
-
-        $sorted_feed = array_count_values(str_word_count($sanitized_feed, 1));
-        arsort($sorted_feed);
+        $sort_array = new WordSortService();
+        $sorted_feed = $sort_array->returnSortedArray($unsanitized_feed);
 
         return $sorted_feed;
     }
