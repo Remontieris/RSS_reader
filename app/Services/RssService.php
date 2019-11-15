@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 class RssService
 {
     public $updated;
+    private $feed_url = 'https://www.theregister.co.uk/software/headlines.atom';
 
     public function returnRss()
     {
@@ -22,7 +23,8 @@ class RssService
      */
     private function prepareFeed()
     {
-        $unsanitized_feed = $this->readRss();
+        $read_url_service = new ReadUrlService();
+        $unsanitized_feed = $read_url_service->returnContentFromUrl($this->feed_url);
 
         if ($unsanitized_feed == null || !$this->wasChanged($unsanitized_feed)) {
             return null;
@@ -30,26 +32,6 @@ class RssService
 
         $sorted_feed = $this->sanitizeAndSortFeed($unsanitized_feed);
         return $sorted_feed;
-    }
-
-    /**
-     * Reads RSS feed from the url
-     *
-     * @return string $feed rss feed as string
-     */
-    private function readRss()
-    {
-        $feed_url = 'https://www.theregister.co.uk/software/headlines.atom';
-
-        try {
-            $client = new Client();
-            $response = $client->request('GET', $feed_url, ['verify' => false]);
-            $feed = $response->getBody()->getContents();
-        } catch (\Exception $e) {
-            $feed = null;
-        }
-
-        return $feed;
     }
 
     /**
