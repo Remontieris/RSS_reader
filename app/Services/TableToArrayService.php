@@ -7,9 +7,11 @@ use KubAT\PhpSimple\HtmlDomParser;
 class TableToArrayService
 {
     /**
-     * Makes a request to passed in url and returns the body content as string
+     * Takes wiki page content as string and converts it's table into list
      *
-     * @return string $content most common word list page as string
+     * @param string $content Wikipedia page as string
+     * 
+     * @return array $word_list Top50 words from table
      */
     public function returnList($content = null)
     {
@@ -27,5 +29,4 @@ class TableToArrayService
 
         return array_flip($word_list);
     }
-
 }

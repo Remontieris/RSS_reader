@@ -9,7 +9,7 @@ class ReadUrlService
     /**
      * Makes a request to passed in url and returns the body content as string
      *
-     * @return string $content most common word list page as string
+     * @return string $content page content as string
      */
     public function returnContentFromUrl($feed_url = null)
     {
@@ -27,5 +27,4 @@ class ReadUrlService
 
         return $content;
     }
-
 }

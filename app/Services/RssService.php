@@ -11,6 +11,11 @@ class RssService
     public $updated;
     private $feed_url = 'https://www.theregister.co.uk/software/headlines.atom';
 
+    /**
+     * Return RSS feed as sorted and sanitized list
+     *
+     * @return array $sorted_feed sorted and sanitized RSS feed
+     */
     public function returnRss()
     {
         $read_url_service = new ReadUrlService();

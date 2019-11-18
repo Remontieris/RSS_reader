@@ -6,7 +6,7 @@ use App\LastUpdated;
 
 class HasChangedService
 {
- /**
+    /**
      * Check if feed has been updated since last request
      *
      * @param string $feed RSS feed as string
@@ -33,7 +33,4 @@ class HasChangedService
 
         return true;
     }
-
-
-
 }

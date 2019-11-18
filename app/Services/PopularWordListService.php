@@ -8,6 +8,11 @@ class PopularWordListService
 {
     private $word_list_url = 'https://en.wikipedia.org/wiki/Most_common_words_in_English';
 
+    /**
+     * Return top50 most popular word list as array from wikipedia
+     *
+     * @return array return most popular word list
+     */
     public function returnPopularWordList()
     {
         $read_url_service = new ReadUrlService();

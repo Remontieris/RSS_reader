@@ -5,9 +5,10 @@ namespace App\Services;
 class WordSortService
 {
     /**
-     * Sanitizes and sorts the given string
+     * Sanitizes and sorts RSS feed by most popular names in it
      *
      * @param string $unsorted_feed Unsanitized rss feed
+     * 
      * @return array $sanitized_feed sorted and sanitized feed as array
      */
     public function returnSortedArray($unsorted_feed = null)
@@ -20,5 +21,4 @@ class WordSortService
 
         return $sorted_feed;
     }
-
 }

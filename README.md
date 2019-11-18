@@ -27,6 +27,7 @@ After cloning you will need cd into the project directory and run these commands
 
 ```bash
 composer install
+composer update
 npm install
 cp .env.example .env
 php artisan key:generate

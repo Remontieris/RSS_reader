@@ -61,6 +61,8 @@ class ListFacade
 
     /**
      * Saves the sorted and sliced data to DB that later will be displayed for user
+     * 
+     * @param array $spliced_list orderd and sanitized RSS feed as array
      */
     private function insertListToDb($spliced_list = null)
     {
